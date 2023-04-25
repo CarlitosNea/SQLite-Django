@@ -1,0 +1,125 @@
+django-admin startproject Proyecto_Tienda
+
+django-admin startproject La_Tiendita    
+
+cd La_Tiendita
+
+django-admin startapp LaTiendita_App 
+
+python manage.py check LaTiendita_App
+
+creamos las tablas en models
+
+python manage.py makemigrations   "subir"
+
+python manage.py migrate   "actualizar"
+
+python manage.py sqlmigrate Login 0001
+
+abrimos la db en dbbrowser
+
+python manage.py shell (para registrar datos)
+
+    from LaTiendita_App.models import Productos  (importamos tabla)
+    Productos.objects.create(codigo="001",nombre="manzana",tipo="fruta",precio="1500",marca="Cosechadora")
+    Productos.objects.create(codigo="002",nombre="pera",tipo="fruta",precio="1200",marca="Cosechadora") 
+    Productos.objects.create(codigo="003",nombre="mango",tipo="fruta",precio="1200",marca="Cosechadora")  
+    Productos.objects.create(codigo="004",nombre="piña",tipo="fruta",precio="1800",marca="Cosechadora")  
+    Productos.objects.create(codigo="005",nombre="uva",tipo="fruta",precio="2000",marca="Cosechadora")  
+    Productos.objects.create(codigo="006",nombre="lulo",tipo="fruta",precio="1600",marca="Finca_Grande")
+    Productos.objects.create(codigo="007",nombre="guayaba",tipo="fruta",precio="1200",marca="Finca_Grande") 
+    Productos.objects.create(codigo="008",nombre="mora",tipo="fruta",precio="2200",marca="Finca_Grande")    
+    Productos.objects.create(codigo="009",nombre="tomate",tipo="vegetal",precio="400",marca="Granja_Internacional")
+    Productos.objects.create(codigo="010",nombre="cebolla",tipo="vegetal",precio="600",marca="Granja_Internacional") 
+    Productos.objects.create(codigo="011",nombre="pimenton",tipo="vegetal",precio="700",marca="Granja_Internacional") 
+    Productos.objects.create(codigo="012",nombre="lechuga",tipo="vegetal",precio="1200",marca="Granja_Internacional")
+    Productos.objects.create(codigo="013",nombre="papa",tipo="tuberculo",precio="1500",marca="Granja_Internacional")
+    Productos.objects.create(codigo="014",nombre="zanahoria",tipo="tuberculo",precio="2000",marca="Granja_Internacional")
+    Productos.objects.create(codigo="015",nombre="yuca",tipo="tuberculo",precio="1500",marca="Granja_Internacional")
+    Productos.objects.create(codigo="016",nombre="pringles",tipo="dulceria",precio="2500",marca="Grandes_Marcas")
+    Productos.objects.create(codigo="017",nombre="submarinos",tipo="dulceria",precio="1500",marca="Grandes_Marcas") 
+    Productos.objects.create(codigo="018",nombre="frutiño",tipo="dulceria",precio="700",marca="Grandes_Marcas")  
+    Productos.objects.create(codigo="019",nombre="brownie",tipo="dulceria",precio="2200",marca="Grandes_Marcas")
+    Productos.objects.create(codigo="020",nombre="lucky",tipo="cigarreria",precio="5400",marca="Luckys")
+
+
+    from LaTiendita_App.models import Clientes  (importamos tabla)
+    Clientes.objects.create(documento="1001",nombre="carlitos",apellido="rodriguez",correo="correo1@gmail.com",telefono="311")
+    Clientes.objects.create(documento="1002",nombre="juanita",apellido="carreño",correo="correo2@gmail.com",telefono="320") 
+    Clientes.objects.create(documento="1003",nombre="karla",apellido="bermudez",correo="correo3@gmail.com",telefono="317") 
+    Clientes.objects.create(documento="1004",nombre="javier",apellido="rodriguez",correo="correo4@gmail.com",telefono="313") 
+    Clientes.objects.create(documento="1005",nombre="sergio",apellido="valero",correo="correo5@gmail.com",telefono="302")
+    Clientes.objects.create(documento="1006",nombre="sara",apellido="valero",correo="correo6@gmail.com",telefono="303")
+    Clientes.objects.create(documento="1007",nombre="nidia",apellido="rodriguez",correo="correo7@gmail.com",telefono="316")
+    Clientes.objects.create(documento="1008",nombre="augusto",apellido="rodriguez",correo="correo8@gmail.com",telefono="310")
+    Clientes.objects.create(documento="1009",nombre="monika",apellido="merchan",correo="correo9@gmail.com",telefono="320")    
+    Clientes.objects.create(documento="1010",nombre="monika",apellido="merchan",correo="correo10@gmail.com",telefono="315")
+    Clientes.objects.create(documento="1011",nombre="santiago",apellido="rodriguez",correo="correo11@gmail.com",telefono="303")
+    Clientes.objects.create(documento="1012",nombre="gabriela",apellido="rodriguez",correo="correo12@gmail.com",telefono="310")
+    Clientes.objects.create(documento="1013",nombre="nelly",apellido="rodriguez",correo="correo13@gmail.com",telefono="322") 
+    Clientes.objects.create(documento="1014",nombre="isabela",apellido="toloza",correo="correo14@gmail.com",telefono="315") 
+    Clientes.objects.create(documento="1015",nombre="samuel",apellido="toloza",correo="correo15@gmail.com",telefono="300") 
+    Clientes.objects.create(documento="1016",nombre="jairo",apellido="valero",correo="correo16@gmail.com",telefono="300") 
+    Clientes.objects.create(documento="1017",nombre="oliva",apellido="moreno",correo="correo17@gmail.com",telefono="303") 
+    Clientes.objects.create(documento="1018",nombre="mercedes",apellido="chavez",correo="correo18@gmail.com",telefono="311")  
+    Clientes.objects.create(documento="1019",nombre="tobias",apellido="rodriguez",correo="firufiru@gmail.com",telefono="320") 
+    Clientes.objects.create(documento="1020",nombre="antonella",apellido="rodriguez",correo="mishiwasi@gmail.com",telefono="322")  
+
+
+
+    consultas productos:
+
+    productos_m=Productos.objects.filter(nombre__startswith='m')
+    for p in productos_m: print(p.__dict__)
+
+    productos_s=Productos.objects.filter(nombre__contains='s')
+    for p in productos_s: print(p.__dict__)
+
+    productos_end_a=Productos.objects.filter(nombre__endswith='a')
+    for p in productos_end_a: print(p.__dict__)
+
+    filtro_precio=Productos.objects.filter(precio=1200)
+    for p in filtro_precio: print(p.__dict__)
+
+    filtro_tipo=Productos.objects.filter(tipo='cigarreria')
+    for p in filtro_tipo: print(p.__dict__)
+
+    filtro_marca=Productos.objects.filter(marca='Finca_Grande')
+    for p in filtro_marca: print(p.__dict__)
+
+    eliminar_marca=Productos.objects.filter(marca='Luckys')
+    eliminar_marca.delete()
+
+    Productos.objects.filter(precio=1200).update(precio=1500)     
+
+    orden_precio = Productos.objects.all().order_by('precio') asc
+    orden_precio = Productos.objects.all().order_by('-precio') desc
+    for p in orden_precio: print(p.__dict__)
+
+    lista_marca=Productos.objects.filter(marca='Granja_Internacional')
+    print(len(lista_marca))
+
+    listar=Productos.objects.all()
+    for p in listar: print(p.__dict__)
+
+
+
+    consultas clientes:
+    listar_desc = Clientes.objects.all().order_by('-nombre') 
+    for c in listar_desc: print(c.__dict__)
+
+    buscar_c = Clientes.objects.filter(nombre='juanita')
+    for c in buscar_c: print(c.__dict__)
+
+    eliminar_doc=Clientes.objects.filter(documento='1008')
+    eliminar_doc.delete()
+
+    listar= Clientes.objects.all()
+    print(len(listar))
+
+
+
+
+
+
+
